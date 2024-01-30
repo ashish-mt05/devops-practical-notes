@@ -1,0 +1,21 @@
+# pod dont have ability to create multiple repilca of pod. so ReplicationController came into picture.
+# with ReplicationController once pod got deleted then with configuration one new pod got created.
+# ReplicationController only work with equal sign of node selector
+kind: ReplicationController               
+apiVersion: v1
+metadata:
+  name: myreplica
+spec:
+  replicas: 2            
+  selector:        
+    myname: ashish       # this is equal to 'myname = ashish'                      
+  template:                
+    metadata:
+      name: testpod6
+      labels:            
+        myname: Bhupinder
+    spec:
+     containers:
+       - name: c00
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello-Bhupinder; sleep 5 ; done"]
